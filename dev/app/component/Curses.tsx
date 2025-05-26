@@ -2,12 +2,18 @@
 import Image from 'next/image';
 
 const courses = [
-  { title: 'Computer Science', image: '/images/computer-science.jpg' },
+  { title: 'Computer Science', image: '/images/computer.jpg' },
   { title: 'Engineering', image: '/images/engineering.jpg' },
-  { title: 'Accounting', image: '/images/accounting.jpg' },
+  { title: 'Accounting', image: '/images/acc.jpg' },
   { title: 'Business Management', image: '/images/business.jpg' },
-  { title: 'Law', image: '/images/law.jpg' },
-  { title: 'Design', image: '/images/design.jpg' },
+  { title: 'Law', image: '/images/lawyer.jpg' },
+  { title: 'Medicine', image: '/images/medicine.jpg' },
+  { title: 'Psychology', image: '/images/phy.jpg' },
+  { title: 'Architecture', image: '/images/arc.jpg' },
+  { title: 'Education', image: '/images/edu.jpg' },
+  { title: 'Political Science', image: '/images/poli.jpg' },
+  { title: 'Mechanical Engineering', image: '/images/mech.jpg' },
+  { title: 'Pharmacy', image: '/images/pha.jpg' },
 ];
 
 export default function Curses() {
@@ -20,20 +26,20 @@ export default function Curses() {
         {courses.map((course, idx) => (
           <div
             key={idx}
-            className="bg-white shadow-lg rounded-xl overflow-hidden hover:shadow-xl transition-all duration-300"
+            className="group bg-white shadow-md rounded-xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 hover:scale-105 transition-all duration-300"
           >
             <Image
               src={course.image}
               alt={course.title}
               width={400}
               height={250}
-              className="w-full h-56 object-cover transition-all"
+              className="w-full h-56 object-cover transition-all duration-300 group-hover:brightness-90"
             />
             <div className="p-5">
-              <h3 className="text-xl font-semibold text-gray-800 transition-all">
+              <h3 className="text-xl font-semibold text-gray-800 transition-all group-hover:text-green-700">
                 {course.title}
               </h3>
-              <p className="text-sm text-gray-600 mt-2 transition-all">
+              <p className="text-sm text-gray-600 mt-2 transition-all group-hover:text-gray-800">
                 Learn and advance your career with top-notch content and expert guidance.
               </p>
             </div>

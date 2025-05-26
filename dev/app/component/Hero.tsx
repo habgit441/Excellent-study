@@ -87,7 +87,7 @@ export default function Hero() {
             alt="Student"
             width={400}
             height={500}
-            className="rounded-3xl w-full h-auto shadow-lg transition-all duration-500"
+            className="rounded-4xl w-full h-auto shadow-lg transition-all duration-500"
           />
 
           <div className="absolute top-5 left-5 bg-blue text-white text-sm font-sm px-4 py-2 rounded-lg shadow transition-all duration-500">
