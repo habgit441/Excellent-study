@@ -59,7 +59,7 @@ export default function Navbar() {
       <nav className="fixed top-0 w-full z-50 flex justify-between items-center px-6 md:px-10 py-4 bg-white/80 backdrop-blur-md shadow-lg">
         <div className="text-2xl font-bold text-green-600 flex items-center gap-2">
           <RiGraduationCapFill size={36} className="text-green-600" />
-          Schooly
+         E Study
         </div>
 
         <ul className="hidden md:flex gap-6 text-sm text-gray-700 font-semibold">
