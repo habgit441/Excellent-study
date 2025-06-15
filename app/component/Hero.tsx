@@ -68,12 +68,15 @@ export default function Hero() {
           {/* Hero Content */}
           <div className="max-w-xl text-center md:text-left animate-fade-in-up">
             <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4 transition duration-700">
-              The{' '}
-              <span className="inline-block bg-green-100 text-green-700 px-2 skew-x-[-10deg]">
-                {words[currentWordIndex]}
-              </span>{' '}
-              academy for you!
-            </h1>
+  The{' '}
+  <span
+    className="inline-block  text-green-700 px-2 skew-x-[-10deg] text-center"
+    style={{ display: 'inline-block', width: '300px' }} 
+  >
+    {words[currentWordIndex]}
+  </span>{' '}
+  academy for you!
+</h1>
             <p className="text-gray-700 text-base leading-relaxed min-h-[120px] whitespace-pre-wrap transition-opacity duration-500 ease-in">
               {typedText}
               <span className="animate-pulse">|</span>
