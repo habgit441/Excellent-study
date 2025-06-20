@@ -1,11 +1,20 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
+import { auth } from '../Lib/firebase'; // ✅ FIXED
+
 import { RiGraduationCapFill } from 'react-icons/ri';
 import { HiMenuAlt3, HiX } from 'react-icons/hi';
 import Image from 'next/image';
 
 export default function Navbar() {
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const [showAuth, setShowAuth] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
@@ -16,7 +25,7 @@ export default function Navbar() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!email || !password || (!isLogin && (!fullName || !confirmPassword))) {
@@ -29,21 +38,27 @@ export default function Navbar() {
       return;
     }
 
-    const formData = {
-      fullName: fullName || '',
-      email,
-      password,
-      type: isLogin ? 'login' : 'register',
-    };
+    try {
+      if (isLogin) {
+        // Login
+        await signInWithEmailAndPassword(auth, email, password);
+      } else {
+        // Register
+        await createUserWithEmailAndPassword(auth, email, password);
+      }
 
-    console.log('Form submitted:', formData);
-    alert(`${isLogin ? 'Login' : 'Signup'} successful!`);
+      // ✅ Redirect to dashboard after login/signup
+      router.push('/dashboard');
 
-    setFullName('');
-    setEmail('');
-    setPassword('');
-    setConfirmPassword('');
-    setShowAuth(false);
+      // Clear form
+      setFullName('');
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
+      setShowAuth(false);
+    } catch (err: any) {
+      alert(err.message || 'Authentication failed');
+    }
   };
 
   const scrollToSection = (id: string) => {
@@ -56,23 +71,24 @@ export default function Navbar() {
 
   return (
     <>
+      {/* Navbar */}
       <nav className="fixed top-0 w-full z-50 flex justify-between items-center px-6 md:px-10 py-4 bg-white/80 backdrop-blur-md shadow-lg">
         <div className="text-2xl font-bold text-green-600 flex items-center gap-2">
           <RiGraduationCapFill size={36} className="text-green-600" />
-         E Study
+          E Study
         </div>
 
         <ul className="hidden md:flex gap-6 text-sm text-gray-700 font-semibold">
-          <li onClick={() => scrollToSection('home')} className="hover:text-green-600 transition cursor-pointer">Home</li>
-          <li onClick={() => scrollToSection('about')} className="hover:text-green-600 transition cursor-pointer">About Us</li>
-          <li onClick={() => scrollToSection('contact')} className="hover:text-green-600 transition cursor-pointer">Contact Us</li>
-          <li onClick={() => scrollToSection('services')} className="hover:text-green-600 transition cursor-pointer">Services</li>
-          <li onClick={() => scrollToSection('faq')} className="hover:text-green-600 transition cursor-pointer">FAQ</li>
+          <li onClick={() => scrollToSection('home')} className="hover:text-green-600 cursor-pointer">Home</li>
+          <li onClick={() => scrollToSection('about')} className="hover:text-green-600 cursor-pointer">About Us</li>
+          <li onClick={() => scrollToSection('contact')} className="hover:text-green-600 cursor-pointer">Contact Us</li>
+          <li onClick={() => scrollToSection('services')} className="hover:text-green-600 cursor-pointer">Services</li>
+          <li onClick={() => scrollToSection('faq')} className="hover:text-green-600 cursor-pointer">FAQ</li>
         </ul>
 
         <button
           onClick={() => setShowAuth(true)}
-          className="hidden md:inline-block bg-green-600 text-white px-5 py-2 rounded-md hover:bg-green-700 transition-all font-semibold"
+          className="hidden md:inline-block bg-green-600 text-white px-5 py-2 rounded-md hover:bg-green-700 transition font-semibold"
         >
           Join Now
         </button>
@@ -86,11 +102,11 @@ export default function Navbar() {
         {menuOpen && (
           <div className="fixed inset-0 bg-white/90 backdrop-blur-lg flex flex-col items-start p-6 md:hidden z-40">
             <ul className="flex flex-col gap-6 w-full text-base text-gray-800 font-medium">
-              <li onClick={() => scrollToSection('/')} className="hover:text-green-600 transition cursor-pointer">Home</li>
-              <li onClick={() => scrollToSection('Curses')} className="hover:text-green-600 transition cursor-pointer">Curses</li>
-              <li onClick={() => scrollToSection('Contact')} className="hover:text-green-600 transition cursor-pointer">Contact Us</li>
-              <li onClick={() => scrollToSection('Testimonial')} className="hover:text-green-600 transition cursor-pointer">Testimonial</li>
-              <li onClick={() => scrollToSection('faq')} className="hover:text-green-600 transition cursor-pointer">FAQ</li>
+              <li onClick={() => scrollToSection('home')} className="hover:text-green-600 cursor-pointer">Home</li>
+              <li onClick={() => scrollToSection('curses')} className="hover:text-green-600 cursor-pointer">Curses</li>
+              <li onClick={() => scrollToSection('contact')} className="hover:text-green-600 cursor-pointer">Contact Us</li>
+              <li onClick={() => scrollToSection('testimonial')} className="hover:text-green-600 cursor-pointer">Testimonial</li>
+              <li onClick={() => scrollToSection('faq')} className="hover:text-green-600 cursor-pointer">FAQ</li>
             </ul>
 
             <button

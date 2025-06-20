@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import Signup from './signup';
 
 export default function Home() {
@@ -9,7 +9,7 @@ export default function Home() {
   );
 }
 
-=======
+
 import Signup from '../component/signup';
 
 export default function Home() {
@@ -19,4 +19,3 @@ export default function Home() {
     </>
   );
 }
->>>>>>> 47e69a7 (many changes made such a logn time.)
