@@ -52,7 +52,7 @@ export default function DashboardNavbar() {
         </div>
       </div>
 
-      {/* Profile Dropdown */}
+     
       <div className="relative">
         <div
           onClick={() => setDropdownOpen(!dropdownOpen)}
