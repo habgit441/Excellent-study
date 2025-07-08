@@ -1,7 +1,7 @@
 'use client';
 
 import { initializeApp } from 'firebase/app';
-import { getAuth, onAuthStateChanged } from 'firebase/auth'; // ✅ Add onAuthStateChanged
+import { getAuth, onAuthStateChanged } from 'firebase/auth'; 
 
 // Firebase config
 const firebaseConfig = {
@@ -19,4 +19,4 @@ const app = initializeApp(firebaseConfig);
 
 // Export auth and listener
 export const auth = getAuth(app);
-export { onAuthStateChanged }; // ✅ Export this explicitly
+export { onAuthStateChanged }; // 

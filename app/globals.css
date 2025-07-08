@@ -4,27 +4,25 @@
   --background: #ffffff;
   --foreground: #171717;
 }
+
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+}
+
 html {
   scroll-behavior: smooth;
 }
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+* {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 @keyframes scroll {
@@ -39,18 +37,30 @@ body {
 .animate-scroll {
   animation: scroll 40s linear infinite;
 }
-/* globals.css or tailwind.config.js (if using Tailwind animation keyframes) */
-@keyframes fade-in-up {
+
+.green-line {
+  position: absolute;
+  width: 2px;
+  height: 80px;
+  background-color: #22c55e; /* Tailwind's green-500 */
+  opacity: 0.3;
+  animation: floatLine 10s linear infinite;
+}
+
+@keyframes floatLine {
   0% {
+    transform: translateY(100vh) rotate(0deg);
     opacity: 0;
-    transform: translateY(20px);
+  }
+  10% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.8;
   }
   100% {
-    opacity: 1;
-    transform: translateY(0);
+    transform: translateY(-100vh) rotate(360deg);
+    opacity: 0;
   }
-}
-.animate-fade-in-up {
-  animation: fade-in-up 0.8s ease-out forwards;
 }
 

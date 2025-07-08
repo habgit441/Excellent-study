@@ -50,6 +50,12 @@ export default function Hero() {
     }, 25);
     return () => clearInterval(typeInterval);
   }, []);
+  const greenLines = new Array(25).fill(0).map((_, i) => ({
+  id: i,
+  left: `${Math.random() * 100}vw`,
+  delay: `${Math.random() * 10}s`,
+  size: `${30 + Math.random() * 80}px`, // random height between 30 and 110px
+}));
 
   return (
     <div
@@ -60,6 +66,22 @@ export default function Hero() {
         backgroundSize: '20px 20px',
       }}
     >
+      <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
+<div className="absolute inset-0 overflow-hidden z-0 pointer-events-none">
+  {greenLines.map((line) => (
+    <div
+      key={line.id}
+      className="green-line"
+      style={{
+        left: line.left,
+        height: line.size,
+        animationDelay: line.delay,
+      }}
+    />
+  ))}
+</div>
+
+</div>
       {/* Navbar */}
       <Navbar />
 

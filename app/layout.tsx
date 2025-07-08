@@ -1,3 +1,4 @@
+// RootLayout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -18,18 +19,14 @@ export const metadata: Metadata = {
   description: "Learn, grow, and succeed with E Study Academy",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
       lang="en"
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable}`}
     >
-      <body className="min-h-screen antialiased bg-white text-black dark:bg-gray-950 dark:text-white transition-colors duration-300">
+      <body className="min-h-screen antialiased transition-colors duration-300">
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
